@@ -2,7 +2,7 @@ from extra.utils import *
 import time
 
 def run():
-    response_cloudx = login_request_safeuem(user="administrator", password="Welcome4463")#Login Request
+    response_cloudx = login_request_safeuem(user="support", password="JhuB2xTuSE8Ryv")#Login Request
     cookie_safeuem = response_cloudx.cookies.get_dict()['token']
     groups = get_groups_request(cookie_safeuem)
     group_ids = get_properties_from_groups(groups)
