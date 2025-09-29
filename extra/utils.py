@@ -3,8 +3,8 @@ import requests
 
 def restart_request(ids_devices, token):
     url = f"{BASE_URL}/api/device/restart"
-    body = {"param" : "restart", "ids" : ids_devices,"offline" : False}
-    cookies = {"token": token}
+    body = {"param" : "", "ids" : ids_devices,"offline" : False}
+    cookies = {"frutossecosreyes-token": token}
     response = create_request(url, HEADERS, "put", data = body, cookies=cookies)
     return response.json()
 
@@ -13,15 +13,14 @@ def get_properties_from_groups(groups):
             
 def get_groups_request(token):
     url = f"{BASE_URL}/api/deviceGroup/get?deviceCount=false"
-    cookies = {"token": token}
-    response = requests.get(url, cookies = cookies)    
+    cookies = {"frutossecosreyes-token": token}
+    response = requests.get(url, cookies = cookies)   
     return response.json()["groups"]
 
 def get_device_request(token, group):
     url = f"{BASE_URL}/api/device/v2?page=0&size=100&order=asc&by=name&group={group}&until&field=id,name,family,status,deploy,enrollTime,offlineSince,groups,labels,info&filter&session"
-    cookies = {"token": token}
+    cookies = {"frutossecosreyes-token": token}
     response = requests.get(url, cookies = cookies)
-    print(f'Get devices per group ')
     return response.json()["devices"]
 
 def login_request_safeuem(user, password):
