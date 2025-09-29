@@ -12,7 +12,7 @@ def get_properties_from_groups(groups):
     return [group["id"] for group in groups]           
             
 def get_groups_request(token):
-    url = f"{BASE_URL}/api/deviceGroup?deviceCount=false"
+    url = f"{BASE_URL}/api/deviceGroup/get?deviceCount=false"
     cookies = {"token": token}
     response = requests.get(url, cookies = cookies)    
     return response.json()["groups"]
@@ -21,10 +21,11 @@ def get_device_request(token, group):
     url = f"{BASE_URL}/api/device/v2?page=0&size=100&order=asc&by=name&group={group}&until&field=id,name,family,status,deploy,enrollTime,offlineSince,groups,labels,info&filter&session"
     cookies = {"token": token}
     response = requests.get(url, cookies = cookies)
+    print(f'Get devices per group ')
     return response.json()["devices"]
 
 def login_request_safeuem(user, password):
-    url = f"{BASE_URL}/partner/login"
+    url = f"{BASE_URL}/api/login"
     body = {"username": user, "password": password}
     response = create_request(url, HEADERS, request_type="post", data = body)
     return response
